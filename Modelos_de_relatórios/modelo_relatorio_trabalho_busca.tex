@@ -1,0 +1,435 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[portuges]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+
+\geometry{left=3cm, right=2cm, top=3cm, bottom=2cm}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Relatório - Algoritmos de Busca},
+    pdfpagemode=FullScreen,
+}
+
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!60!black},
+    stringstyle=\color{orange},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=5pt,
+    backgroundcolor=\color{gray!10},
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    frame=single,
+    tabsize=4,
+    captionpos=b,
+    breaklines=true,
+    breakatwhitespace=false,
+    escapeinside={\%*}{*)}
+}
+
+\title{%
+    \Large UNIVERSIDADE FEDERAL DE PELOTAS – UFPEL \\
+    CENTRO DE DESENVOLVIMENTO TECNOLÓGICO (CDTec) \\
+    CURSOS DE CIÊNCIA DA COMPUTAÇÃO E ENGENHARIA DE COMPUTAÇÃO \\
+    DISCIPLINA DE FUNDAMENTOS DE INTELIGÊNCIA ARTIFICIAL \\
+    PROF.: Dr. ANDERSON PRIEBE FERRUGEM
+    \vspace{2cm}
+    \Huge\textbf{RELATÓRIO DE TRABALHO PRÁTICO} \\
+    \Large\textbf{ALGORITMOS DE BUSCA EM ESPAÇO DE ESTADOS} \\
+    \Large\textbf{SISTEMA DE NAVEGAÇÃO PARA ENTREGAS URBANAS}
+}
+
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\newpage
+
+\section*{Dados do Trabalho}
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Título} & Sistema de Navegação para Entregas Urbanas \\
+\hline
+\textbf{Disciplina} & Fundamentos de Inteligência Artificial \\
+\hline
+\textbf{Professor} & Dr. Anderson Priebe Ferrugem \\
+\hline
+\textbf{Data de Entrega} & \_\_\_\_/\_\_\_\_/\_\_\_\_\_\_ \\
+\hline
+\end{tabular}
+
+\vspace{1cm}
+
+\section*{Identificação do Grupo}
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Nome do Grupo} &  \\
+\hline
+\textbf{Componentes} & Nome completo – Matrícula \\
+ & Nome completo – Matrícula \\
+ & Nome completo – Matrícula \\
+ & Nome completo – Matrícula \\
+ & Nome completo – Matrícula \\
+\hline
+\end{tabular}
+
+\newpage
+
+\tableofcontents
+\newpage
+
+\section{INTRODUÇÃO}
+
+[Contextualização do problema – máximo 20 linhas]
+
+\begin{itemize}
+    \item Apresente o problema de roteirização urbana e sua importância para empresas de entrega.
+    \item Explique o que são algoritmos de busca em espaço de estados e por que são adequados para este problema.
+    \item Descreva brevemente o objetivo do trabalho: implementar e comparar diferentes algoritmos de busca para encontrar a melhor rota entre dois pontos no centro de Pelotas.
+    \item Cite as ferramentas utilizadas (Python, NetworkX, etc.).
+\end{itemize}
+
+\section{FUNDAMENTAÇÃO TEÓRICA}
+
+[Explique cada um dos conceitos abaixo com suas próprias palavras – máximo 30 linhas]
+
+\subsection{Busca em Espaço de Estados}
+\begin{itemize}
+    \item Definição de espaço de estados, nós, arestas, custos.
+    \item Diferença entre busca cega e busca informada.
+\end{itemize}
+
+\subsection{Algoritmos Implementados}
+Para cada algoritmo, descreva:
+
+\subsubsection{BFS (Busca em Largura)}
+Funcionamento, estrutura de dados utilizada, completude, optimalidade (quando se aplica), complexidades.
+
+\subsubsection{DFS (Busca em Profundidade)}
+Funcionamento, estrutura de dados utilizada, completude, optimalidade, complexidades.
+
+\subsubsection{UCS (Busca de Custo Uniforme)}
+Funcionamento, estrutura de dados utilizada, completude, optimalidade, complexidades.
+
+\subsubsection{Busca Gulosa (Best-First)}
+Funcionamento, papel da heurística, completude, optimalidade.
+
+\subsubsection{A* (A-Estrela)}
+Funcionamento, função \( f(n) = g(n) + h(n) \), condições para otimalidade (heurística admissível e consistente).
+
+\subsection{Heurística}
+\begin{itemize}
+    \item Definição de heurística.
+    \item Explique a heurística utilizada (distância em linha reta) e justifique por que ela é admissível para este problema.
+\end{itemize}
+
+\section{METODOLOGIA}
+
+[Descreva passo a passo como o trabalho foi desenvolvido – máximo 30 linhas]
+
+\subsection{Modelagem do Grafo}
+\begin{itemize}
+    \item Como os dados do mapa foram carregados (formato CSV).
+    \item Nós e arestas: o que cada nó representa, quais informações foram armazenadas (coordenadas, nomes).
+    \item Custos: distância (metros) e tempo (minutos).
+\end{itemize}
+
+\subsection{Implementação dos Algoritmos}
+\begin{itemize}
+    \item Explique como cada algoritmo foi implementado (estruturas de dados utilizadas: pilha, fila, heapq).
+    \item Detalhe como o registro de nós expandidos e fronteira máxima foi realizado.
+    \item Como a detecção de ciclos foi tratada.
+\end{itemize}
+
+\subsection{Cenários de Teste}
+\begin{itemize}
+    \item \textbf{Cenário A (Minimizar Distância):} origem, destino, critério utilizado.
+    \item \textbf{Cenário B (Minimizar Tempo):} origem, destino, critério utilizado.
+    \item Justifique a escolha dos pontos de origem e destino.
+\end{itemize}
+
+\subsection{Visualização}
+Explique como os caminhos foram visualizados (biblioteca matplotlib, função implementada).
+
+\section{RESULTADOS}
+
+\subsection{Tabela Comparativa – Cenário A (Distância)}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Algoritmo} & \textbf{Custo total (m)} & \textbf{Nós expandidos} & \textbf{Fronteira máxima} & \textbf{Solução ótima?} \\
+\hline
+BFS &  &  &  &  \\
+\hline
+DFS &  &  &  &  \\
+\hline
+UCS &  &  &  &  \\
+\hline
+Gulosa &  &  &  &  \\
+\hline
+A* &  &  &  &  \\
+\hline
+\end{tabular}
+\caption{Resultados dos algoritmos para o Cenário A (minimizar distância)}
+\end{table}
+
+\subsection{Tabela Comparativa – Cenário B (Tempo)}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Algoritmo} & \textbf{Custo total (min)} & \textbf{Nós expandidos} & \textbf{Fronteira máxima} & \textbf{Solução ótima?} \\
+\hline
+BFS &  &  &  &  \\
+\hline
+DFS &  &  &  &  \\
+\hline
+UCS &  &  &  &  \\
+\hline
+Gulosa &  &  &  &  \\
+\hline
+A* &  &  &  &  \\
+\hline
+\end{tabular}
+\caption{Resultados dos algoritmos para o Cenário B (minimizar tempo)}
+\end{table}
+
+\subsection{Visualizações}
+
+[Insira as imagens geradas para cada algoritmo em cada cenário, com legendas explicativas]
+
+\begin{figure}[H]
+\centering
+% \includegraphics[width=0.8\textwidth]{figura1.png}
+\caption{Caminho encontrado pelo BFS (Cenário A)}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+% \includegraphics[width=0.8\textwidth]{figura2.png}
+\caption{Caminho encontrado pelo DFS (Cenário A)}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+% \includegraphics[width=0.8\textwidth]{figura3.png}
+\caption{Caminho encontrado pelo UCS (Cenário A)}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+% \includegraphics[width=0.8\textwidth]{figura4.png}
+\caption{Caminho encontrado pela Busca Gulosa (Cenário A)}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+% \includegraphics[width=0.8\textwidth]{figura5.png}
+\caption{Caminho encontrado pelo A* (Cenário A)}
+\end{figure}
+
+\section{DISCUSSÃO}
+
+[Responda às perguntas abaixo de forma argumentada, com base nos resultados obtidos – máximo 50 linhas]
+
+\subsection{Completude}
+Todos os algoritmos encontraram solução? Se algum falhou, explique por quê.
+
+\subsection{Optimalidade}
+Quais algoritmos encontraram a solução de menor custo em cada cenário? Por que BFS encontrou o caminho de menor distância mesmo sem considerar custos? (Relacione com o fato de todas as arestas terem custos iguais ou diferentes.)
+
+\subsection{Complexidade de Tempo}
+Qual algoritmo expandiu mais nós? Qual expandiu menos? Relacione com a complexidade teórica de cada um e com as características do grafo.
+
+\subsection{Complexidade de Espaço}
+Qual algoritmo manteve a maior fronteira (maior consumo de memória)? Explique por que isso acontece (DFS tem baixa fronteira, BFS tem alta, etc.).
+
+\subsection{Impacto da Heurística}
+Compare os resultados da Busca Gulosa e do A*. A heurística utilizada é admissível? Isso influenciou os resultados? A Busca Gulosa encontrou a solução ótima? Se não, por quê?
+
+\subsection{Análise Prática}
+Se você fosse implementar um sistema de navegação em tempo real para entregadores, qual algoritmo escolheria? Considere o equilíbrio entre optimalidade, velocidade (nós expandidos) e consumo de memória. Justifique.
+
+\section{SISTEMA DE ROTEIRIZAÇÃO DESENVOLVIDO}
+
+\subsection{Descrição do Sistema}
+\begin{itemize}
+    \item Explique o funcionamento do script \texttt{roteirizador.py}.
+    \item Quais são as funcionalidades disponíveis? (menu interativo, escolha de origem/destino, critério, algoritmo, visualização, salvamento de log).
+\end{itemize}
+
+\subsection{Exemplos de Execução}
+[Insira prints da execução do sistema com diferentes configurações]
+
+\subsubsection{Exemplo 1:} Origem CD\_CENTRO → Destino PRACA\_PEDRO\_OSORIO, critério distância, algoritmo A*
+
+[Print da tela + imagem do mapa gerado]
+
+\subsubsection{Exemplo 2:} Origem CD\_CENTRO → Destino PRACA\_PEDRO\_OSORIO, critério tempo, algoritmo UCS
+
+[Print da tela + imagem do mapa gerado]
+
+\subsubsection{Exemplo 3:} (Outra combinação relevante)
+
+[Print da tela + imagem do mapa gerado]
+
+\subsection{Código-Fonte (Trechos Relevantes)}
+[Insira os trechos mais importantes do código com explicações]
+
+\begin{lstlisting}[caption=Implementação do algoritmo A*]
+def busca_a_star(grafo, inicio, objetivo, heuristica, custo='distance'):
+    """
+    Implementação do algoritmo A* para busca de caminhos
+    Retorna: (caminho, custo_total, nos_expandidos, fronteira_max)
+    """
+    fronteira = []  # Fila de prioridade
+    heapq.heappush(fronteira, (0 + heuristica(inicio, objetivo), 0, inicio, [inicio]))
+    
+    explorados = set()
+    nos_expandidos = 0
+    fronteira_max = 0
+    
+    while fronteira:
+        fronteira_max = max(fronteira_max, len(fronteira))
+        f, g, no_atual, caminho = heapq.heappop(fronteira)
+        
+        if no_atual in explorados:
+            continue
+            
+        nos_expandidos += 1
+        explorados.add(no_atual)
+        
+        if no_atual == objetivo:
+            return caminho, g, nos_expandidos, fronteira_max
+        
+        for vizinho in grafo.neighbors(no_atual):
+            if vizinho not in explorados:
+                custo_aresta = grafo[no_atual][vizinho][custo]
+                novo_g = g + custo_aresta
+                novo_f = novo_g + heuristica(vizinho, objetivo)
+                novo_caminho = caminho + [vizinho]
+                heapq.heappush(fronteira, (novo_f, novo_g, vizinho, novo_caminho))
+    
+    return None, float('inf'), nos_expandidos, fronteira_max
+\end{lstlisting}
+
+\section{CONCLUSÃO}
+
+[Síntese dos principais achados – máximo 20 linhas]
+
+\begin{itemize}
+    \item Retome brevemente o objetivo do trabalho.
+    \item Destaque os principais resultados e conclusões.
+    \item Aponte dificuldades encontradas durante o desenvolvimento.
+    \item Sugira melhorias futuras (ex.: considerar trânsito em tempo real, múltiplos destinos, restrições de horário, etc.).
+\end{itemize}
+
+\section{REFERÊNCIAS}
+
+[Liste as referências utilizadas, incluindo livros, artigos, documentações e sites]
+
+\begin{itemize}
+    \item RUSSELL, Stuart; NORVIG, Peter. Inteligência Artificial. 3. ed. Rio de Janeiro: Elsevier, 2013.
+    \item Documentação NetworkX. Disponível em: \url{https://networkx.org/}. Acesso em: [data].
+    \item Documentação Matplotlib. Disponível em: \url{https://matplotlib.org/}. Acesso em: [data].
+    \item AISpace. Tutorial interativo de busca. Disponível em: \url{http://www.aispace.org/search/}. Acesso em: [data].
+\end{itemize}
+
+\section{APÊNDICES}
+
+\subsection{Código-Fonte Completo}
+[Opcional – pode ser incluído como link para o repositório ou arquivo anexo]
+
+\subsection{Link do Vídeo de Apresentação}
+[Inserir link do YouTube não listado ou Google Drive]
+
+\section{DECLARAÇÃO DE AUTORIA}
+
+Declaramos que este trabalho é de nossa autoria e não foram utilizadas fontes não citadas ou permitidas, incluindo código gerado por inteligência artificial sem devida referência.
+
+\vspace{1cm}
+
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Nome} & \textbf{Assinatura} \\
+\hline
+ &  \\
+\hline
+ &  \\
+\hline
+ &  \\
+\hline
+ &  \\
+\hline
+ &  \\
+\hline
+\end{tabular}
+
+\vspace{1cm}
+
+Pelotas, \_\_\_\_ de \_\_\_\_\_\_\_\_\_\_\_\_\_ de \_\_\_\_\_\_.
+
+\newpage
+
+\section*{ANEXO – CHECKLIST DE AVALIAÇÃO (PARA USO DO GRUPO)}
+
+Antes de entregar, verifique se:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{12cm}|c|}
+\hline
+\textbf{Item} & \textbf{OK?} \\
+\hline
+Todos os algoritmos foram implementados (BFS, DFS, UCS, Gulosa, A*) & ☐ \\
+\hline
+Os experimentos foram realizados para os dois cenários (distância e tempo) & ☐ \\
+\hline
+As tabelas de resultados estão preenchidas & ☐ \\
+\hline
+As imagens de visualização foram geradas e incluídas & ☐ \\
+\hline
+As perguntas da seção de discussão foram respondidas & ☐ \\
+\hline
+O script \texttt{roteirizador.py} está funcionando e foi testado & ☐ \\
+\hline
+O link do vídeo está funcionando e o vídeo tem entre 12-15 minutos & ☐ \\
+\hline
+Todos os membros participaram da apresentação & ☐ \\
+\hline
+O relatório está formatado corretamente (PDF) & ☐ \\
+\hline
+O arquivo .zip com todos os materiais foi gerado & ☐ \\
+\hline
+\end{tabular}
+\end{table}
+
+\end{document}
